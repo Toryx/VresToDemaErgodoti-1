@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/whiter"
+    android:id="@+id/cons"
+    tools:context=".Main2Activity">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+
+        android:layout_width="405dp"
+
+        android:layout_height="100dp"
+        android:background="@drawable/gradientbackground"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/main"
+            android:layout_width="405dp"
+
+            android:layout_height="wrap_content"
+
+            android:background="@drawable/gradientbackground"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Συνδεδεμένος Χρήστης : "
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/menu"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+
+                android:layout_marginEnd="8dp"
+                android:adjustViewBounds="true"
+                android:background="#00FFFFFF"
+
+                android:cropToPadding="false"
+                android:onClick="showPopup"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_settings_black_24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/main">
+
+            <LinearLayout
+                android:id="@+id/apo"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/border"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Αποστολές"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/par"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/border"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Παραλαβές"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/pel"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/border"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Πελάτες"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="420dp"
+        android:layout_height="20dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/gradientbackground"
+
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@+id/relativeLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/antikatavoli">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="417dp"
+        android:layout_height="20dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/gradientbackground"
+
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@+id/relativeLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/relativeLayout2">
+
+    </LinearLayout>
+
+
+
+
+
+
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="397dp"
+        android:layout_height="200dp"
+
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="32dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/relativeLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.833"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <EditText
+            android:id="@+id/searchpara"
+            android:layout_width="192dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/listaapostolea"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="184dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="32dp"
+            android:ems="10"
+            android:hint="Αναζήτηση Aποστολέα..."
+            android:inputType="textPersonName"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@+id/apostoleas"
+            tools:layout_editor_absoluteY="179dp" />
+
+        <TextView
+            android:id="@+id/apostoleas"
+            android:layout_width="192dp"
+            android:layout_height="40dp"
+            android:layout_above="@+id/nameapostolea"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="32dp"
+            android:layout_toStartOf="@+id/listaapostolea"
+            android:ems="10"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/apostoleas"
+            android:textAlignment="center"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/nameapostolea"
+            android:layout_width="158dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/emailapostolea"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+
+            android:layout_marginBottom="32dp"
+            android:layout_toStartOf="@+id/listaapostolea"
+            android:ems="10"
+
+            android:fontFamily="sans-serif-light"
+            android:hint="'Ονομα Αποστολέα"
+            android:inputType="textPersonName"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textColorHint="#000000"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/tilapostolea"
+            android:layout_width="184dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_toEndOf="@+id/emailapostolea"
+
+            android:ems="10"
+            android:fontFamily="sans-serif-light"
+            android:hint="Τηλέφωνο"
+            android:inputType="phone"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textColorHint="#000000" />
+
+        <Spinner
+            android:id="@+id/listaapostolea"
+            android:layout_width="208dp"
+            android:layout_height="40dp"
+
+            android:layout_above="@+id/tilapostolea"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/btn_bg"
+            android:ems="10"
+            android:textAlignment="center"
+            android:textColor="#7A7A7E"
+            android:textColorHint="#7A7A7E"
+            android:textSize="16dp" />
+
+        <EditText
+            android:id="@+id/emailapostolea"
+            android:layout_width="196dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="8dp"
+
+            android:layout_marginBottom="8dp"
+            android:ems="10"
+            android:fontFamily="sans-serif-light"
+            android:hint="Email Αποστολέα"
+            android:inputType="textEmailAddress"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textColorHint="#000000"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="397dp"
+        android:layout_height="200dp"
+
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="32dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/antikatavoli"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.833"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <EditText
+            android:id="@+id/searchpara2"
+            android:layout_width="192dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/listaparalipti"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="184dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="32dp"
+            android:ems="10"
+            android:hint="Αναζήτηση Παραλήπτη..."
+            android:inputType="textPersonName"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@+id/paraliptis"
+            tools:layout_editor_absoluteY="179dp" />
+
+        <TextView
+            android:id="@+id/paraliptis"
+            android:layout_width="192dp"
+            android:layout_height="40dp"
+            android:layout_above="@+id/nameparalipti"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="32dp"
+            android:layout_toStartOf="@+id/listaparalipti"
+            android:ems="10"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/paraliptis"
+            android:textAlignment="center"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/nameparalipti"
+            android:layout_width="158dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/emailparalipti"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+
+            android:layout_marginBottom="32dp"
+            android:layout_toStartOf="@+id/listaparalipti"
+            android:ems="10"
+
+            android:fontFamily="sans-serif-light"
+            android:hint="'Ονομα Παραλήπτη"
+            android:inputType="textPersonName"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textColorHint="#000000"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/tilparalipti"
+            android:layout_width="184dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_toEndOf="@+id/emailparalipti"
+
+            android:ems="10"
+            android:fontFamily="sans-serif-light"
+            android:hint="Τηλέφωνο"
+            android:inputType="phone"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textColorHint="#000000" />
+
+        <Spinner
+            android:id="@+id/listaparalipti"
+            android:layout_width="208dp"
+            android:layout_height="40dp"
+
+            android:layout_above="@+id/tilparalipti"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/btn_bg"
+            android:ems="10"
+            android:textAlignment="center"
+            android:textColor="#7A7A7E"
+            android:textColorHint="#7A7A7E"
+            android:textSize="16dp" />
+
+        <EditText
+            android:id="@+id/emailparalipti"
+            android:layout_width="196dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="8dp"
+
+            android:layout_marginBottom="8dp"
+            android:ems="10"
+            android:fontFamily="sans-serif-light"
+            android:hint="Email Παραλήπτη"
+            android:inputType="textEmailAddress"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textColorHint="#000000"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/testaki"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/btn_bg"
+        android:text="Αποστολή"
+        android:textColor="#FFFFFF"
+
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <CheckedTextView
+        android:id="@+id/paradosi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+        android:checked="false"
+
+        android:gravity="center"
+        android:text="Παράδωση κατ'οικον"
+
+        android:textColor="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/eidosdematos"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <CheckedTextView
+        android:id="@+id/antikatavoli"
+        android:layout_width="171dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+        android:checked="false"
+
+        android:gravity="center"
+        android:text="Αντικαταβολή"
+
+        android:textColor="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/eidosdematos"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Spinner
+        android:id="@+id/eidosdematos"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/et_bg"
+        android:ems="10"
+        android:textAlignment="center"
+        android:textColorHint="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/testaki"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+
+
+</android.support.constraint.ConstraintLayout>
