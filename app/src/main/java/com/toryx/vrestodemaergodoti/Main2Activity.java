@@ -60,6 +60,8 @@ public class Main2Activity extends AppCompatActivity {
     private LinearLayout prlvs;
     private LinearLayout pela;
     public Intent intentforcity;
+    Boolean SenderRegistered=false;
+    Boolean ReceiverRegistered=false;
     private Button re;
     private static final String FILE_NAME = "example.txt";
     EditText nameap;
@@ -368,6 +370,9 @@ public class Main2Activity extends AppCompatActivity {
                     @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("MMddHHmm");//
                     code = dateFormat.format(cal.getTime());
                     code = code + workplace + pros + antikatavoli + paralavi;
+
+                    for(int i=0;i<emai.size();i++){if(emai.get(i).equals(emailap.getText().toString())){SenderRegistered=true;}}
+                    for(int i=0;i<emai.size();i++){if(emai.get(i).equals(emailpa.getText().toString())){ReceiverRegistered=true;}}
                     final AlertDialog.Builder builder = new AlertDialog.Builder(Main2Activity.this);
                     builder.setCancelable(true);
                     builder.setTitle("Επιβεβαίωση Αποστολής");
@@ -382,16 +387,18 @@ public class Main2Activity extends AppCompatActivity {
                                     element.setCode(code);
                                     refe.push().setValue(element);
                                     if (apostoleas > -1) {
+                                        if(SenderRegistered){
                                         elemcus.setFriend(namepa.getText().toString().trim());
                                         elemcus.setCond("Στην αναμονή για αποστολή");
                                         elemcus.setCode(code);
-                                        mDatabase.child(IDs.get(apostoleas)).child("Send").push().setValue(elemcus);
+                                        mDatabase.child(IDs.get(apostoleas)).child("Send").push().setValue(elemcus);}
                                     }
                                     if (paraliptis > -1) {
+                                        if(ReceiverRegistered){
                                         elemcus.setFriend(nameap.getText().toString().trim());
                                         elemcus.setCond("Στην αναμονή για αποστολή");
                                         elemcus.setCode(code);
-                                        mDatabase.child(IDs.get(paraliptis)).child("Received").push().setValue(elemcus);
+                                        mDatabase.child(IDs.get(paraliptis)).child("Received").push().setValue(elemcus);}
 
                                         finish();
                                         overridePendingTransition(0, 0);

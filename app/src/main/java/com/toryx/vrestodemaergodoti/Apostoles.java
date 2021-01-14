@@ -813,12 +813,10 @@ public void sendconf(final String kod){
                         if (codessend.get(i).equals(kod)) {
                             dbRef3.child(codessendid.get(i)).child("cond").setValue("Καθοδόν");
                         } }
-                    Log.e("paok3", codesrecid.get(0));
 
                     for (int i = 0; i < codesrec.size(); i++) {
                         if(codesrec.get(i)!=null){
                         if (codesrec.get(i).equals(kod)) {
-                            Log.e("paok3", codesrecid.get(i));
                             dbRef4.child(codesrecid.get(i)).child("cond").setValue("Καθοδόν");
                         } }}
 

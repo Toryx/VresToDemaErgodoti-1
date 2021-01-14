@@ -708,6 +708,8 @@ public class Paralaves extends AppCompatActivity {
 
 
         ChangeDemaCond(alld.get(selectedPosition),para);
+        adapter.clear();
+        addChildEventListener();
     }
 
     public void showPopup(View v) {
@@ -776,7 +778,7 @@ public class Paralaves extends AppCompatActivity {
 
                         for (int i = 0; i < codessend.size(); i++) {
                             if (codessend.get(i).equals(kod)) {
-                                if(par){dbRef3.child(codessendid.get(i)).child("cond").setValue("sto katastima");}
+                                if(par){dbRef3.child(codessendid.get(i)).child("cond").setValue("Προς Παραλαβή");}
                                 else{dbRef3.child(codessendid.get(i)).child("cond").setValue("Το Δέμα έχει παραληφθεί");}
 
                             } }
@@ -786,7 +788,7 @@ public class Paralaves extends AppCompatActivity {
                             if(codesrec.get(i)!=null){
                                 if (codesrec.get(i).equals(kod)) {
                                     Log.e("paok3", codesrecid.get(i));
-                                    if(par){ dbRef4.child(codesrecid.get(i)).child("cond").setValue("sto katastima");}
+                                    if(par){ dbRef4.child(codesrecid.get(i)).child("cond").setValue("Προς Παραλαβή");}
                                         else{ dbRef4.child(codesrecid.get(i)).child("cond").setValue("Το Δέμα έχει παραληφθεί");}
                                 } }}
 
