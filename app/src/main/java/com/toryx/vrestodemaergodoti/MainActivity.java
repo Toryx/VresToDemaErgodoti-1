@@ -3,7 +3,6 @@ package com.toryx.vrestodemaergodoti;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -65,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
         Button register = (Button) findViewById(R.id.register);
         firebaseAuth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(this);
-        FirebaseUser user = firebaseAuth.getCurrentUser();
         addChildEventListener();
 
 
@@ -75,9 +73,6 @@ public class MainActivity extends AppCompatActivity {
         eisodos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                username.setText("ilias12tory@gmail.com");
-                password.setText("qqqqqq");
-                meros="t";
                 if(username.getText().toString().matches("") || password.getText().toString().matches("") ){
                     Toast.makeText(MainActivity.this, "Παρακαλώ συμπληρώστε Ονομα Χρήστη και Κωδικο", Toast.LENGTH_LONG).show();}
                 else{validate(username.getText().toString(), password.getText().toString());
@@ -158,9 +153,7 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseUser firebaseUser = firebaseAuth.getInstance().getCurrentUser();
         Boolean emailflag = firebaseUser.isEmailVerified();
-        if(emailflag) {
-
-            Intent intent = new Intent(getBaseContext(), Main2Activity.class);
+        if(emailflag) { Intent intent = new Intent(getBaseContext(), Main2Activity.class);
             intent.putExtra("EXTRA_SESSION_ID", phoneNumbers);
             intent.putExtra("EXTRA_SESSION_ID3", Emails);
             intent.putExtra("EXTRA_SESSION_ID2", Id);

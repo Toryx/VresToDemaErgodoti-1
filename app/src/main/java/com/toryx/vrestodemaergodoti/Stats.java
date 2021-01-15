@@ -45,8 +45,6 @@ public class Stats extends AppCompatActivity {
     ArrayList<String>  ggid;
     DatabaseReference dbRef;
     DatabaseReference dbRef2;
-    myAdapter myAdapter;
-    ListView list;
     Button b;
     ArrayList<String> onomata = new ArrayList<>();
     ArrayList<String> onomata2 = new ArrayList<>();
@@ -58,35 +56,30 @@ public class Stats extends AppCompatActivity {
         setContentView(R.layout.activity_stats);
         firebaseAuth = FirebaseAuth.getInstance();
         String Id=getIntent().getStringExtra("ID");
-
         String name=getIntent().getStringExtra("nam");
-        Log.e("ggwp","Activity Paralaves");
         listid = new ArrayList<>();
         nameid = new ArrayList<>();
         ggid = new ArrayList<>();
-      dataListView = (ListView) findViewById(R.id.listrec);
+        dataListView = (ListView) findViewById(R.id.listrec);
         dataListView2 = (ListView) findViewById(R.id.listrec2);
         cond =  findViewById(R.id.condition);
         EditText srh= findViewById(R.id.pelatis2);
         par = findViewById(R.id.textView7);
         apo = findViewById(R.id.textView8);
-         backst= findViewById(R.id.back2);
-      dbRef = database.getReference().child("Pelates").child(Id).child("Send");
+        backst= findViewById(R.id.back2);
+        dbRef = database.getReference().child("Pelates").child(Id).child("Send");
         dbRef2 = database.getReference().child("Pelates").child(Id).child("Received");
 
         backst.setOnClickListener(new View.OnClickListener() { public void onClick(View v) {
             finish();
         }});
-       // myAdapter= new myAdapter(this,listid,nameid,ggid);
-     //   dataListView.setAdapter(myAdapter);
-     adapter = new ArrayAdapter<String>(this,R.layout.demata, onomata);
+        adapter = new ArrayAdapter<String>(this,R.layout.demata, onomata);
         adapter2 = new ArrayAdapter<String>(this,R.layout.demata, onomata2);
-
-      dataListView.setAdapter(adapter);
-      dataListView2.setAdapter(adapter2);
+        dataListView.setAdapter(adapter);
+        dataListView2.setAdapter(adapter2);
         addChildEventListener();
         addChildEventListener2();
-backst.setOnClickListener(new View.OnClickListener() {
+        backst.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
         finish();
@@ -112,16 +105,16 @@ backst.setOnClickListener(new View.OnClickListener() {
 
         cond.setText("Αποστολές/Παραλαβές απο "+name);
 
-par.setOnClickListener(new View.OnClickListener() {
+        par.setOnClickListener(new View.OnClickListener() {
 
     @SuppressLint("ResourceType")
     @Override
     public void onClick(View v) {
         par.setTextColor(Color.BLACK);
         apo.setTextColor(Color.WHITE);
-       apo.setBackgroundResource(R.drawable.gradientbackground);
+        apo.setBackgroundResource(R.drawable.gradientbackground);
         par.setBackgroundResource(Color.TRANSPARENT);
-dataListView.setVisibility(View.VISIBLE);
+        dataListView.setVisibility(View.VISIBLE);
         dataListView2.setVisibility(View.GONE);
 
     }
