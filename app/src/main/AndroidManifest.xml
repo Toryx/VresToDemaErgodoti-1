@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.toryx.vrestodemaergodoti">
+package="com.toryx.vrestodemaergodoti">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <application
-        android:allowBackup="true"
-        android:icon="@drawable/iconsender"
-        android:label="@string/app_name"
-        android:roundIcon="@drawable/eikonidiosender"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".Stats"></activity>
-        <activity android:name=".ProfileAct"></activity>
-        <activity android:name=".Update_P"></activity>
-        <activity android:name=".Pelates" />
-        <activity android:name=".Apostoles" />
-        <activity android:name=".Paralaves" />
-        <activity android:name=".Register" />
-        <activity android:name=".Main2Activity" />
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<application
+    android:allowBackup="true"
+    android:icon="@drawable/iconsender"
+    android:label="@string/app_name"
+    android:roundIcon="@drawable/eikonidiosender"
+    android:supportsRtl="true"
+    android:theme="@style/AppTheme.NoActionBar">
+    <activity android:name=".Stats"></activity>
+    <activity android:name=".ProfileAct"></activity>
+    <activity android:name=".Update_P"></activity>
+    <activity android:name=".Pelates" />
+    <activity android:name=".Apostoles" />
+    <activity android:name=".Paralaves" />
+    <activity android:name=".Register" />
+    <activity android:name=".Main2Activity" />
+    <activity android:name=".MainActivity">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-    </application>
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
+</application>
 
 </manifest>

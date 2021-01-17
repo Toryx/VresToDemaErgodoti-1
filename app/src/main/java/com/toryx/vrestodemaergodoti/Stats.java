@@ -35,17 +35,14 @@ public class Stats extends AppCompatActivity {
     ArrayAdapter<String> adapter2;
     private ListView dataListView;
     private ListView dataListView2;
-    private TextView cond;
     private TextView par;
     private TextView apo;
-    private ImageView backst;
     private FirebaseAuth firebaseAuth;
     ArrayList<String> listid;
     ArrayList<String>  nameid;
     ArrayList<String>  ggid;
     DatabaseReference dbRef;
     DatabaseReference dbRef2;
-    Button b;
     ArrayList<String> onomata = new ArrayList<>();
     ArrayList<String> onomata2 = new ArrayList<>();
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -62,11 +59,11 @@ public class Stats extends AppCompatActivity {
         ggid = new ArrayList<>();
         dataListView = (ListView) findViewById(R.id.listrec);
         dataListView2 = (ListView) findViewById(R.id.listrec2);
-        cond =  findViewById(R.id.condition);
+        TextView cond = findViewById(R.id.condition);
         EditText srh= findViewById(R.id.pelatis2);
         par = findViewById(R.id.textView7);
         apo = findViewById(R.id.textView8);
-        backst= findViewById(R.id.back2);
+        ImageView backst = findViewById(R.id.back2);
         dbRef = database.getReference().child("Pelates").child(Id).child("Send");
         dbRef2 = database.getReference().child("Pelates").child(Id).child("Received");
 

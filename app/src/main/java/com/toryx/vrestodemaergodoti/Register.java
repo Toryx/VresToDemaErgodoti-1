@@ -29,15 +29,12 @@ public class Register extends AppCompatActivity {
     private Button regi;
     private TextView ret;
     private FirebaseAuth firebaseAuth;
-    private FirebaseStorage firebaseStorage;
-    private DatabaseReference mDatabase;
     private ProgressDialog progressDialog;
     String email="";
     String name="";
     String tel="";
     private TextView usertel;
     String password="";
-    private StorageReference storageReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +42,7 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         assign();
         firebaseAuth=FirebaseAuth.getInstance();
-        firebaseStorage=FirebaseStorage.getInstance();
-        storageReference=firebaseStorage.getReference();
         progressDialog = new ProgressDialog(this);
-
 
         regi.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +54,6 @@ public class Register extends AppCompatActivity {
                     String usermail = userEmail.getText().toString().trim();
                     String userpass = userPass.getText().toString().trim();
                     firebaseAuth.createUserWithEmailAndPassword(usermail,userpass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-
                         @Override
 
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -68,7 +61,6 @@ public class Register extends AppCompatActivity {
                             if(task.isSuccessful()){
                                 sendD();
                                 sendE();
-                                mDatabase = FirebaseDatabase.getInstance().getReference();
 
 
                             }else { Toast.makeText(Register.this,"Εγγραφή Μη Επιτυχής",Toast.LENGTH_SHORT).show();}

@@ -10,10 +10,8 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.Layout;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,12 +21,10 @@ import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -36,34 +32,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
-import com.jakewharton.processphoenix.ProcessPhoenix;
-
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.security.IdentityScope;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Main2Activity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
-    private FirebaseDatabase firebaseDatabase;
     private DatabaseReference refe;
     private DatabaseReference mDatabase;
-    private FirebaseStorage firebaseStorage;
-    private Button exit;
-    private LinearLayout apstles;
-    private LinearLayout prlvs;
-    private LinearLayout pela;
-    public Intent intentforcity;
     Boolean SenderRegistered=false;
     Boolean ReceiverRegistered=false;
-    private Button re;
-    private static final String FILE_NAME = "example.txt";
     EditText nameap;
     EditText emailap;
     EditText tilap;
@@ -79,7 +57,6 @@ public class Main2Activity extends AppCompatActivity {
     int Nouser;
     Code element;
     ArrayAdapter<String> myAdapter;
-    ArrayAdapter<String> temp1;
     ArrayAdapter<String> myAdapter2;
     CodeForCustomer elemcus;
     ArrayList<String> tils = new ArrayList<>();
@@ -87,7 +64,6 @@ public class Main2Activity extends AppCompatActivity {
     ArrayList<String> sessionId = new ArrayList<>();
     ArrayList<String> IDs = new ArrayList<>();
     CheckedTextView anti;
-    boolean filtered = false;
     CheckedTextView para;
     TextView kalosorisma;
     String workplace = "";
@@ -97,13 +73,12 @@ public class Main2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
-        exit = findViewById(R.id.testaki);
-        apstles = findViewById(R.id.apo);
-        prlvs = findViewById(R.id.par);
-        pela = findViewById(R.id.pel);
+        Button exit = findViewById(R.id.testaki);
+        LinearLayout apstles = findViewById(R.id.apo);
+        LinearLayout prlvs = findViewById(R.id.par);
+        LinearLayout pela = findViewById(R.id.pel);
         firebaseAuth = FirebaseAuth.getInstance();
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        firebaseStorage = FirebaseStorage.getInstance();
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         anti = findViewById(R.id.antikatavoli);
         para = findViewById(R.id.paradosi);
         nameap = findViewById(R.id.nameapostolea);
@@ -137,22 +112,17 @@ public class Main2Activity extends AppCompatActivity {
                 emailap.getText().clear();
                 emailpa.getText().clear();
             }
-        } else {
-            sessionId.add("");
-            emai.add("");
-            tils.add("");
-            IDs.add("");
+        }
+        else{Toast.makeText(Main2Activity.this, "Δεν υπάρχουν στοιχεία στη Βάση Δεδομένων", Toast.LENGTH_LONG).show();
+
 
         }
 
         Spinner mySpinner = (Spinner) findViewById(R.id.listaapostolea);
-
         myAdapter = new ArrayAdapter<String>(Main2Activity.this,
                 R.layout.customspinner, emai);
-
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mySpinner.setAdapter(myAdapter);
-
         mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
@@ -164,11 +134,7 @@ public class Main2Activity extends AppCompatActivity {
                         pos = j;
                     }
                 }
-                Log.e("true", myAdapter.getItem(i));
-                Log.e("true", emai.get(pos));
-                Log.e("true", String.valueOf(pos));
-
-                if (srh.getText().equals("")) {
+                    if (srh.getText().equals("")) {
                     nameap.setText(sessionId.get(pos));
                     tilap.setText(tils.get(pos));
                     if (i == 0) {

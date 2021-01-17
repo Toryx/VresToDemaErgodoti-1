@@ -29,7 +29,6 @@ import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
-
     private TextView username;
     private TextView password;
     private FirebaseAuth firebaseAuth;
@@ -64,6 +63,12 @@ public class MainActivity extends AppCompatActivity {
         Button register = (Button) findViewById(R.id.register);
         firebaseAuth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(this);
+        Spinner mySpinner = (Spinner) findViewById(R.id.spinner1);
+
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(MainActivity.this,
+                R.layout.customspinner, getResources().getStringArray(R.array.names));
+        myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mySpinner.setAdapter(myAdapter);
         addChildEventListener();
 
 
@@ -86,12 +91,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Spinner mySpinner = (Spinner) findViewById(R.id.spinner1);
 
-        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(MainActivity.this,
-                R.layout.customspinner, getResources().getStringArray(R.array.names));
-        myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mySpinner.setAdapter(myAdapter);
 
         mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -104,9 +104,6 @@ public class MainActivity extends AppCompatActivity {
                     meros = "n";
                 } else if (i == 4) {
                     meros = "t";
-                } else if (i == 0) {
-
-
                 }
             }
 
@@ -124,14 +121,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void validate(String Usern, String Userp) {
-
-       // progressDialog.setMessage("Αυθεντικοποιηση...");
-
         progressDialog.show();
         progressDialog.setContentView(R.layout.pd);
         progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-
-
         firebaseAuth.signInWithEmailAndPassword(Usern, Userp).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
 
