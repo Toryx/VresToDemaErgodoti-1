@@ -2,7 +2,6 @@ package com.toryx.vrestodemaergodoti;
 
 public class CodeForCustomer {
     private String code;
-
     private String friend;
     private String cond;
 

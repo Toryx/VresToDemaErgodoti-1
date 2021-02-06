@@ -73,7 +73,7 @@ public class Main2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
-        Button exit = findViewById(R.id.testaki);
+        Button kataxwrisi = findViewById(R.id.testaki);
         LinearLayout apstles = findViewById(R.id.apo);
         LinearLayout prlvs = findViewById(R.id.par);
         LinearLayout pela = findViewById(R.id.pel);
@@ -325,7 +325,7 @@ public class Main2Activity extends AppCompatActivity {
         });
 
 
-        exit.setOnClickListener(new View.OnClickListener() {
+        kataxwrisi.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
@@ -394,7 +394,9 @@ public class Main2Activity extends AppCompatActivity {
         apstles.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.e("meros",workplace);
                 Intent intent = new Intent(getBaseContext(), Apostoles.class);
+                intent.putExtra("meros",workplace);
                 startActivity(intent);
             }
         });
@@ -402,19 +404,15 @@ public class Main2Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), Paralaves.class);
+                intent.putExtra("meros",workplace);
                 startActivity(intent);
+
             }
         });
         pela.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), Pelates.class);
-
-                intent.putExtra("EXTRA_SESSION_ID", sessionId);
-                intent.putExtra("EXTRA_SESSION_ID3", emai);
-                intent.putExtra("EXTRA_SESSION_ID2", IDs);
-                intent.putExtra("EXTRA_SESSION_ID4", tils);
-                intent.putExtra("WORKSPACE", workplace);
                 startActivity(intent);
             }
         });

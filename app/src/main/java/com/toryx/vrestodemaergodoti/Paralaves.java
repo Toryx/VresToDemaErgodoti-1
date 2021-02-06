@@ -71,15 +71,12 @@ public class Paralaves extends AppCompatActivity {
     CheckedTextView city2;
     CheckedTextView city3;
     CheckedTextView city4;
-    CheckedTextView city5;
-    CheckedTextView city6;
-    CheckedTextView city7;
-    CheckedTextView city8;
+
 
     //antikatavoli filtro
     CheckedTextView filtroanti;
     CheckedTextView filtoparadosi;
-
+    String workplace;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,16 +92,13 @@ public class Paralaves extends AppCompatActivity {
         final Animation fadeIn = AnimationUtils.loadAnimation(Paralaves.this, android.R.anim.fade_in);
         final Animation fadeOut = AnimationUtils.loadAnimation(Paralaves.this, android.R.anim.fade_out);
         prosapos = findViewById(R.id.prosapostp);
-
+        workplace=getIntent().getStringExtra("meros");
         //Ολες οι Πολεις απο τα φιλτρα
         city1 = findViewById(R.id.city1p);
         city2 = findViewById(R.id.city2p);
         city3 = findViewById(R.id.city3p);
         city4 = findViewById(R.id.city4p);
-        city5 = findViewById(R.id.city5p);
-        city6 = findViewById(R.id.city6p);
-        city7 = findViewById(R.id.city7p);
-        city8 = findViewById(R.id.city8p);
+
 
         filtroanti = findViewById(R.id.filtroantikatavolip);
         filtrakoumpi = findViewById(R.id.filtrp);
@@ -141,6 +135,11 @@ public class Paralaves extends AppCompatActivity {
 
                     }
                 });
+
+        if(workplace.equals("t")){city1.setVisibility(View.GONE);}
+        if(workplace.equals("b")){city3.setVisibility(View.GONE);}
+        if(workplace.equals("a")){city2.setVisibility(View.GONE);}
+        if(workplace.equals("n")){city4.setVisibility(View.GONE);}
 
         addChildEventListener();
         addChildEventListener2();
@@ -212,10 +211,10 @@ public class Paralaves extends AppCompatActivity {
                 } else {
                     prosapos.setChecked(true);
 
-                    Toast.makeText(Paralaves.this, "mono ta pros apostoli", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Paralaves.this, "Εμφανίζονται μόνο τα προς παραλαβή ή τα καθοδόν", Toast.LENGTH_LONG).show();
                     adapter.clear();
                     for (String[] s : alld) {
-                        if (s[3].equals("Στην αναμονή για αποστολή")) {
+                        if (s[3].equals("Καθοδόν") || s[3].equals("Προς Παραλαβή")) {
                             adapter.add(s[0] + " | " + s[3]);
 
                         }
@@ -321,110 +320,7 @@ public class Paralaves extends AppCompatActivity {
                 }
             }
         });
-//ΘΕΣΣ ΠΑΡΑΛΑΒΗ
-        city5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (city5.isChecked()) {
 
-                    Toast.makeText(Paralaves.this, "ΠΑΡΑΛΒΗ oxi mono apo Salonika", Toast.LENGTH_LONG).show();
-
-
-                } else {
-                    city5.setChecked(true);
-                    city6.setChecked(false);
-                    city7.setChecked(false);
-                    city8.setChecked(false);
-                    adapter.clear();
-                    Toast.makeText(Paralaves.this, "ΠΑΡΑΛΑΒΒΗ mono apo Salonika", Toast.LENGTH_LONG).show();
-                    for (String[] s : alld) {
-                        if (s[0].charAt(9) == 't') {
-                            adapter.add(s[0] + " | " + s[3]);
-                        }
-                    }
-
-
-                }
-            }
-        });
-
-        city6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (city6.isChecked()) {
-
-                    Toast.makeText(Paralaves.this, "Apostoli oxi mono apo alex", Toast.LENGTH_LONG).show();
-
-
-                } else {
-                    city6.setChecked(true);
-                    city5.setChecked(false);
-                    city7.setChecked(false);
-                    city8.setChecked(false);
-                    adapter.clear();
-                    Toast.makeText(Paralaves.this, "ΠΑΡΑΛΑΒΒΗ mono apo aslex", Toast.LENGTH_LONG).show();
-                    for (String[] s : alld) {
-                        if (s[0].charAt(9) == 'a') {
-                            adapter.add(s[0] + " | " + s[3]);
-                        }
-                    }
-
-
-                }
-            }
-        });
-
-        city7.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (city7.isChecked()) {
-
-                    Toast.makeText(Paralaves.this, "Apostoli oxi mono apo beroia", Toast.LENGTH_LONG).show();
-
-
-                } else {
-                    city7.setChecked(true);
-                    city6.setChecked(false);
-                    city5.setChecked(false);
-                    city8.setChecked(false);
-                    adapter.clear();
-                    Toast.makeText(Paralaves.this, "ΠΑΡΑΛΑΒΒΗ mono apo beroia", Toast.LENGTH_LONG).show();
-                    for (String[] s : alld) {
-                        if (s[0].charAt(9) == 'b') {
-                            adapter.add(s[0] + " | " + s[3]);
-                        }
-                    }
-
-
-                }
-            }
-        });
-
-        city8.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (city8.isChecked()) {
-
-                    Toast.makeText(Paralaves.this, "Apostoli oxi mono apo naousa", Toast.LENGTH_LONG).show();
-
-
-                } else {
-                    city8.setChecked(true);
-                    city6.setChecked(false);
-                    city7.setChecked(false);
-                    city5.setChecked(false);
-                    adapter.clear();
-                    Toast.makeText(Paralaves.this, "ΠΑΡΑΛΑΒΒΗ mono apo naousa", Toast.LENGTH_LONG).show();
-                    for (String[] s : alld) {
-                        if (s[0].charAt(9) == 'n') {
-                            adapter.add(s[0] + " | " + s[3]);
-                        }
-                    }
-
-
-                }
-            }
-        });
         //φιλτρο αντικαταβολή
         filtroanti.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -489,10 +385,6 @@ public class Paralaves extends AppCompatActivity {
                 city2.setChecked(false);
                 city3.setChecked(false);
                 city4.setChecked(false);
-                city5.setChecked(false);
-                city6.setChecked(false);
-                city7.setChecked(false);
-                city8.setChecked(false);
                 filtroanti.setChecked(false);
                 filtoparadosi.setChecked(false);
 
@@ -503,30 +395,16 @@ public class Paralaves extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String data = dataListView.getItemAtPosition(selectedPosition).toString();
-                if (data.charAt(8) == 't') {
-                    Toast.makeText(Paralaves.this, "To δέμα στάλθηκε", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Paralaves.this, "To δέμα παραληφθηκε στο κατάστημα", Toast.LENGTH_LONG).show();
                     deleteItem(v,true);
-
-
-                } else {
-                    dataListView.setItemChecked(selectedPosition, false);
-                    Toast.makeText(Paralaves.this, "Δεν έχετε δικαιωδοσία μετάτροπής της κατάστασης αυτού του δέματος", Toast.LENGTH_LONG).show();
-                }
             }
         });
         deleteButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String data = dataListView.getItemAtPosition(selectedPosition).toString();
-                if (data.charAt(8) == 't') {
-                    Toast.makeText(Paralaves.this, "To δέμα στάλθηκε", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Paralaves.this, "To δέμα παραλήφθηκε από τον πελάτη", Toast.LENGTH_LONG).show();
                     deleteItem(v,false);
-
-
-                } else {
-                    dataListView.setItemChecked(selectedPosition, false);
-                    Toast.makeText(Paralaves.this, "Δεν έχετε δικαιωδοσία μετάτροπής της κατάστασης αυτού του δέματος", Toast.LENGTH_LONG).show();
-                }
             }
         });
 
@@ -540,17 +418,17 @@ public class Paralaves extends AppCompatActivity {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 String ve = (String) dataSnapshot.child("code").getValue();
-                String ant = "Oxi Antikatavoli";
+                String ant = "Χωρίς Αντικαταβολή";
 
-                adapter.add((String) dataSnapshot.child("code").getValue() + " | " + dataSnapshot.child("cond").getValue());
 
-                if (ve.charAt(10) == 'Y') {
-                    ant = "Me antikatavoli";
+                if(ve.charAt(9) == workplace.charAt(0)){
+                    adapter.add((String) dataSnapshot.child("code").getValue() + " | " + dataSnapshot.child("cond").getValue());
 
-                }
-
-                dat = new String[]{dataSnapshot.child("code").getValue().toString(), dataSnapshot.child("apostoleas").getValue().toString(), dataSnapshot.child("paraliptis").getValue().toString(), dataSnapshot.child("cond").getValue().toString(), ant};
-                alld.add(dat);
+                    if (ve.charAt(10) == 'Y') {
+                        ant = "Με Αντικαταβολή";
+                    }}
+                    dat = new String[]{dataSnapshot.child("code").getValue().toString(), dataSnapshot.child("apostoleas").getValue().toString(), dataSnapshot.child("paraliptis").getValue().toString(), dataSnapshot.child("cond").getValue().toString(), ant};
+                    alld.add(dat);
 
 
                 listKeys.add(dataSnapshot.getKey());
@@ -697,11 +575,6 @@ public class Paralaves extends AppCompatActivity {
             }
             x++;
         }
-
-        Log.e("ws", adapter.getItem(selectedPosition).substring(0, 12));
-
-        Log.e("ws", String.valueOf(x));
-        Log.e("ws", String.valueOf(selectedPosition));
         selectedPosition = x;
         if(para){ dbRef.child(listKeys.get(selectedPosition)).child("cond").setValue("Προς Παραλαβή");}
         else {dbRef.child(listKeys.get(selectedPosition)).child("cond").setValue("Το Δέμα έχει παραληφθεί");}

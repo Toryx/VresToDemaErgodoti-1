@@ -3,9 +3,6 @@ package com.toryx.vrestodemaergodoti;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
-import android.support.constraint.Constraints;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -14,7 +11,6 @@ import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
@@ -32,26 +28,17 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.nio.channels.SelectableChannel;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 public class Apostoles extends AppCompatActivity {
     private ListView dataListView;
     private EditText itemText;
     private LinearLayout co;
-    private Button deleteButton;
-    private Button resetbut;
-    private ImageView pisw;
+    private Button SendButton;
     String sendname;
     boolean newsort=true;
     LinearLayout filtrakoumpi;
@@ -60,14 +47,12 @@ public class Apostoles extends AppCompatActivity {
     DatabaseReference dbRef4;
     private FirebaseAuth firebaseAuth;
     private LinearLayout filt;
-
     private int selectedPosition = 0;
     String[] dat = new String[5];
     ArrayList<String> gg = new ArrayList();
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference dbRef = database.getReference().child("Codes");
     private DatabaseReference dbRef2 = database.getReference().child("Pelates");
-
     ArrayList<String> listItems = new ArrayList<String>();
     ArrayList<String> listKeys = new ArrayList<String>();
     ArrayList<String[]> alld = new ArrayList<String[]>();
@@ -80,10 +65,6 @@ public class Apostoles extends AppCompatActivity {
     ArrayList<String> codesrec = new ArrayList<>();
     ArrayList<String> codesrecid = new ArrayList<>();
     //Ολες οι Πολεις απο τα φιλτρα
-    CheckedTextView city1;
-    CheckedTextView city2;
-    CheckedTextView city3;
-    CheckedTextView city4;
     CheckedTextView city5;
     CheckedTextView city6;
     CheckedTextView city7;
@@ -91,7 +72,7 @@ public class Apostoles extends AppCompatActivity {
     //antikatavoli filtro
     CheckedTextView filtroanti;
     CheckedTextView filtoparadosi;
-
+    String workplace;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,18 +83,14 @@ public class Apostoles extends AppCompatActivity {
         dataListView = findViewById(R.id.listaapostoles);
         itemText = findViewById(R.id.editText);
         taxikoumpi=findViewById(R.id.taxi);
-        deleteButton = findViewById(R.id.sendbut);
-        resetbut = findViewById(R.id.reset);
-        deleteButton.setEnabled(false);
+        SendButton = findViewById(R.id.sendbut);
+        Button resetbut = findViewById(R.id.reset);
+        SendButton.setEnabled(false);
         final Animation fadeIn = AnimationUtils.loadAnimation(Apostoles.this, android.R.anim.fade_in);
         final Animation fadeOut = AnimationUtils.loadAnimation(Apostoles.this, android.R.anim.fade_out);
         prosapos = findViewById(R.id.prosapost);
-
+        workplace=getIntent().getStringExtra("meros");
         //Ολες οι Πολεις απο τα φιλτρα
-        city1 = findViewById(R.id.city1);
-        city2 = findViewById(R.id.city2);
-        city3 = findViewById(R.id.city3);
-        city4 = findViewById(R.id.city4);
         city5 = findViewById(R.id.city5);
         city6 = findViewById(R.id.city6);
         city7 = findViewById(R.id.city7);
@@ -121,7 +98,7 @@ public class Apostoles extends AppCompatActivity {
 
         filtroanti = findViewById(R.id.filtroantikatavoli);
         filtrakoumpi = findViewById(R.id.filtr);
-        pisw = findViewById(R.id.back);
+        ImageView pisw = findViewById(R.id.back);
         pisw.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 finish();
@@ -147,14 +124,17 @@ public class Apostoles extends AppCompatActivity {
                 new AdapterView.OnItemClickListener() {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         selectedPosition = position;
-                        deleteButton.setEnabled(true);
+                        SendButton.setEnabled(true);
                         String data = dataListView.getItemAtPosition(position).toString();
                         Toast.makeText(Apostoles.this, data, Toast.LENGTH_LONG).show();
 
 
                     }
                 });
-
+        if(workplace.equals("t")){city5.setVisibility(View.GONE);}
+        if(workplace.equals("b")){city7.setVisibility(View.GONE);}
+        if(workplace.equals("a")){city6.setVisibility(View.GONE);}
+        if(workplace.equals("n")){city8.setVisibility(View.GONE);}
         addChildEventListener();
         addChildEventListener2();
 
@@ -230,26 +210,23 @@ public class Apostoles extends AppCompatActivity {
         prosapos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                city5.setChecked(false);
+                city6.setChecked(false);
+                city7.setChecked(false);
+                city8.setChecked(false);
+                filtroanti.setChecked(false);
+                filtoparadosi.setChecked(false);
 
                 if (prosapos.isChecked()) {
                     prosapos.setChecked(false);
-                    Toast.makeText(Apostoles.this, "ola ta demata", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Apostoles.this, "Εμφανίζονται όλα τα δέματα", Toast.LENGTH_LONG).show();
                     adapter.clear();
                     addChildEventListener();
-                    city1.setChecked(false);
-                    city2.setChecked(false);
-                    city3.setChecked(false);
-                    city4.setChecked(false);
-                    city5.setChecked(false);
-                    city6.setChecked(false);
-                    city7.setChecked(false);
-                    city8.setChecked(false);
-                    filtroanti.setChecked(false);
-                    filtoparadosi.setChecked(false);
+
                 } else {
                     prosapos.setChecked(true);
 
-                    Toast.makeText(Apostoles.this, "mono ta pros apostoli", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Apostoles.this, "Εμφανίζονται μόνο τα δέματα προς αποστολή", Toast.LENGTH_LONG).show();
                     adapter.clear();
                     for (String[] s : alld) {
                         if (s[3].equals("Στην αναμονή για αποστολή")) {
@@ -264,107 +241,13 @@ public class Apostoles extends AppCompatActivity {
         });
 
 //OnClickListener για κάθε πόλη
-//ΘΕΣΣΑΛΟΝΙΚΗ ΑΠΟΣΤΟΛΗ
-        city1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (city1.isChecked()) {
 
-                } else {
-
-                    city1.setChecked(true);
-                    city2.setChecked(false);
-                    city3.setChecked(false);
-                    city4.setChecked(false);
-                    Toast.makeText(Apostoles.this, "Apostoli  apo Thess", Toast.LENGTH_LONG).show();
-                    adapter.clear();
-                    for (String[] s : alld) {
-                        if (s[0].charAt(8) == 't') {
-                            adapter.add(s[0] + " | " + s[3]);
-                        }
-                    }
-
-
-                }
-            }
-        });
-//ΑΛΕΞΑΝΔΡΕΙΑ ΑΠΟΣΤΟΛΗ
-        city2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (city2.isChecked()) {
-
-                } else {
-
-                    city2.setChecked(true);
-                    city1.setChecked(false);
-                    city3.setChecked(false);
-                    city4.setChecked(false);
-                    Toast.makeText(Apostoles.this, "Apostoli  apo ΑΛΕΧandreia", Toast.LENGTH_LONG).show();
-                    adapter.clear();
-                    for (String[] s : alld) {
-                        if (s[0].charAt(8) == 'a') {
-                            adapter.add(s[0] + " | " + s[3]);
-                        }
-                    }
-
-
-                }
-            }
-        });
-//ΒΕΡΟΙΑ ΑΠΟΣΤΟΛΗ
-        city3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (city3.isChecked()) {
-
-                } else {
-                    city3.setChecked(true);
-                    city1.setChecked(false);
-                    city2.setChecked(false);
-                    city4.setChecked(false);
-                    Toast.makeText(Apostoles.this, "Apostoli mono apo ΒΕΡΟΙΑ", Toast.LENGTH_LONG).show();
-                    adapter.clear();
-                    for (String[] s : alld) {
-                        if (s[0].charAt(8) == 'b') {
-                            adapter.add(s[0] + " | " + s[3]);
-                        }
-                    }
-
-
-                }
-            }
-        });
-//ΝΑΟΥΣΑ ΑΠΟΣΤΟΛΗ
-        city4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (city4.isChecked()) {
-
-                } else {
-                    city4.setChecked(true);
-                    city1.setChecked(false);
-                    city2.setChecked(false);
-                    city3.setChecked(false);
-                    adapter.clear();
-                    Toast.makeText(Apostoles.this, "Apostoli mono apo ΝΑΟΥΣΑ", Toast.LENGTH_LONG).show();
-                    for (String[] s : alld) {
-                        if (s[0].charAt(8) == 'n') {
-                            adapter.add(s[0] + " | " + s[3]);
-                        }
-                    }
-
-
-                }
-            }
-        });
 //ΘΕΣΣ ΠΑΡΑΛΑΒΗ
         city5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (city5.isChecked()) {
 
-                    Toast.makeText(Apostoles.this, "ΠΑΡΑΛΒΗ oxi mono apo Salonika", Toast.LENGTH_LONG).show();
 
 
                 } else {
@@ -373,7 +256,7 @@ public class Apostoles extends AppCompatActivity {
                     city7.setChecked(false);
                     city8.setChecked(false);
                     adapter.clear();
-                    Toast.makeText(Apostoles.this, "ΠΑΡΑΛΑΒΒΗ mono apo Salonika", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Apostoles.this, "Παραλαβή μόνο από Θεσσαλονίκη", Toast.LENGTH_LONG).show();
                     for (String[] s : alld) {
                         if (s[0].charAt(9) == 't') {
                             adapter.add(s[0] + " | " + s[3]);
@@ -390,7 +273,7 @@ public class Apostoles extends AppCompatActivity {
             public void onClick(View v) {
                 if (city6.isChecked()) {
 
-                    Toast.makeText(Apostoles.this, "Apostoli oxi mono apo alex", Toast.LENGTH_LONG).show();
+
 
 
                 } else {
@@ -399,7 +282,7 @@ public class Apostoles extends AppCompatActivity {
                     city7.setChecked(false);
                     city8.setChecked(false);
                     adapter.clear();
-                    Toast.makeText(Apostoles.this, "ΠΑΡΑΛΑΒΒΗ mono apo aslex", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Apostoles.this, "Παραλαβή μόνο από Αλεξάνδρεια", Toast.LENGTH_LONG).show();
                     for (String[] s : alld) {
                         if (s[0].charAt(9) == 'a') {
                             adapter.add(s[0] + " | " + s[3]);
@@ -416,7 +299,7 @@ public class Apostoles extends AppCompatActivity {
             public void onClick(View v) {
                 if (city7.isChecked()) {
 
-                    Toast.makeText(Apostoles.this, "Apostoli oxi mono apo beroia", Toast.LENGTH_LONG).show();
+
 
 
                 } else {
@@ -425,7 +308,7 @@ public class Apostoles extends AppCompatActivity {
                     city5.setChecked(false);
                     city8.setChecked(false);
                     adapter.clear();
-                    Toast.makeText(Apostoles.this, "ΠΑΡΑΛΑΒΒΗ mono apo beroia", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Apostoles.this, "Παραλαβή μόνο από Βέροια", Toast.LENGTH_LONG).show();
                     for (String[] s : alld) {
                         if (s[0].charAt(9) == 'b') {
                             adapter.add(s[0] + " | " + s[3]);
@@ -442,7 +325,6 @@ public class Apostoles extends AppCompatActivity {
             public void onClick(View v) {
                 if (city8.isChecked()) {
 
-                    Toast.makeText(Apostoles.this, "Apostoli oxi mono apo naousa", Toast.LENGTH_LONG).show();
 
 
                 } else {
@@ -451,7 +333,7 @@ public class Apostoles extends AppCompatActivity {
                     city7.setChecked(false);
                     city5.setChecked(false);
                     adapter.clear();
-                    Toast.makeText(Apostoles.this, "ΠΑΡΑΛΑΒΒΗ mono apo naousa", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Apostoles.this, "Παραλαβή μόνο από Νάουσα", Toast.LENGTH_LONG).show();
                     for (String[] s : alld) {
                         if (s[0].charAt(9) == 'n') {
                             adapter.add(s[0] + " | " + s[3]);
@@ -470,7 +352,7 @@ public class Apostoles extends AppCompatActivity {
 
                 } else {
                     filtroanti.setChecked(true);
-                    Toast.makeText(Apostoles.this, "Me antikatavoli", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Apostoles.this, "Με Αντικαταβολή", Toast.LENGTH_LONG).show();
                     int x = adapter.getCount();
                     for (int i = 0; i < x; i++) {
                         String s = adapter.getItem(i);
@@ -489,7 +371,7 @@ public class Apostoles extends AppCompatActivity {
                 }
             }
         });
-        //φιλτρο αντικαταβολή
+        //φιλτρο παραδωσης
         filtoparadosi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -497,7 +379,7 @@ public class Apostoles extends AppCompatActivity {
 
                 } else {
                     filtoparadosi.setChecked(true);
-                    Toast.makeText(Apostoles.this, "Me paradosi katoikon", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Apostoles.this, "Παράδοση Κατοίκον", Toast.LENGTH_LONG).show();
                     int x = adapter.getCount();
                     for (int i = 0; i < x; i++) {
                         String s = adapter.getItem(i);
@@ -522,10 +404,6 @@ public class Apostoles extends AppCompatActivity {
                 adapter.clear();
 
                 addChildEventListener();
-                city1.setChecked(false);
-                city2.setChecked(false);
-                city3.setChecked(false);
-                city4.setChecked(false);
                 city5.setChecked(false);
                 city6.setChecked(false);
                 city7.setChecked(false);
@@ -536,34 +414,13 @@ public class Apostoles extends AppCompatActivity {
 
             }
         });
-        deleteButton.setOnClickListener(new View.OnClickListener() {
+
+        SendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String data = dataListView.getItemAtPosition(selectedPosition).toString();
-                if (data.charAt(8) == 't') {
                     Toast.makeText(Apostoles.this, "To δέμα στάλθηκε", Toast.LENGTH_LONG).show();
-                    deleteItem(v);
-
-
-                } else {
-                    dataListView.setItemChecked(selectedPosition, false);
-                    Toast.makeText(Apostoles.this, "Δεν έχετε δικαιωδοσία μετάτροπής της κατάστασης αυτού του δέματος", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String data = dataListView.getItemAtPosition(selectedPosition).toString();
-                if (data.charAt(8) == 't') {
-                    Toast.makeText(Apostoles.this, "To δέμα στάλθηκε", Toast.LENGTH_LONG).show();
-                    deleteItem(v);
-
-
-                } else {
-                    dataListView.setItemChecked(selectedPosition, false);
-                    Toast.makeText(Apostoles.this, "Δεν έχετε δικαιωδοσία μετάτροπής της κατάστασης αυτού του δέματος", Toast.LENGTH_LONG).show();
-                }
+                    SendItem(v);
             }
         });
 
@@ -576,15 +433,16 @@ public class Apostoles extends AppCompatActivity {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 String ve = (String) dataSnapshot.child("code").getValue();
-                String ant = "Oxi Antikatavoli";
+                String ant = "Χωρίς Αντικαταβολή";
+                Log.e("every",workplace);
 
+                if(ve.charAt(8) == workplace.charAt(0)){
                 adapter.add((String) dataSnapshot.child("code").getValue() + " | " + dataSnapshot.child("cond").getValue());
 
                 if (ve.charAt(10) == 'Y') {
-                    ant = "Me antikatavoli";
-
+                    ant = "Με Αντικαταβολή";
                 }
-
+                }
                 dat = new String[]{dataSnapshot.child("code").getValue().toString(), dataSnapshot.child("apostoleas").getValue().toString(), dataSnapshot.child("paraliptis").getValue().toString(), dataSnapshot.child("cond").getValue().toString(), ant};
                 alld.add(dat);
 
@@ -691,12 +549,8 @@ public class Apostoles extends AppCompatActivity {
 
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
-
-
                 codesrecid.add(dataSnapshot.getKey());
                 codesrec.add((String)  dataSnapshot.child("code").getValue());
-                Log.e("paok2",String.valueOf(dataSnapshot.child("code").getValue()));
             }
 
             @Override
@@ -721,7 +575,7 @@ public class Apostoles extends AppCompatActivity {
     }
 
 
-    public void deleteItem(View view) {
+    public void SendItem(View view) {
         dataListView.setItemChecked(selectedPosition, false);
 
 
@@ -733,15 +587,17 @@ public class Apostoles extends AppCompatActivity {
             }
             x++;
         }
-
-        Log.e("ws", adapter.getItem(selectedPosition).substring(0, 12));
-
-        Log.e("ws", String.valueOf(x));
-        Log.e("ws", String.valueOf(selectedPosition));
         selectedPosition = x;
         dbRef.child(listKeys.get(selectedPosition)).child("cond").setValue("Καθοδόν");
 
         ChangeDemaCond(alld.get(selectedPosition));
+        city5.setChecked(false);
+        city6.setChecked(false);
+        city7.setChecked(false);
+        city8.setChecked(false);
+        filtroanti.setChecked(false);
+        filtoparadosi.setChecked(false);
+        prosapos.setChecked(false);
         adapter.clear();
         addChildEventListener();
     }
@@ -785,13 +641,11 @@ public class Apostoles extends AppCompatActivity {
 
                 dbRef3 = database.getReference().child("Pelates").child(Id.get(i)).child("Send");
                 addChildEventListener3();
-            Log.e("paok1",Id.get(i));
             }
 
             if (names.get(i).equals(par)) {
                 dbRef4 = database.getReference().child("Pelates").child(Id.get(i)).child("Received");
                 addChildEventListener4();
-                Log.e("paok2",Id.get(i));
             }
 
         }

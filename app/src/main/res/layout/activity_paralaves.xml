@@ -252,12 +252,12 @@
 
     <LinearLayout
         android:id="@+id/filtersp"
-        android:layout_width="wrap_content"
-        android:layout_height="242dp"
+        android:layout_width="0dp"
+        android:layout_height="160dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_weight="1"
-        android:background="@drawable/gradientbackground"
+        android:background="@drawable/btn_bg"
         android:orientation="vertical"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
@@ -281,6 +281,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/border"
             android:orientation="horizontal"
+            android:layout_margin="4dp"
             android:weightSum="4">
 
             <CheckedTextView
@@ -309,6 +310,7 @@
                 android:checkMark="?android:attr/listChoiceIndicatorMultiple"
                 android:checked="false"
                 android:gravity="center"
+                android:layout_marginStart="2dp"
                 android:text="Αλεξάνδρεια"
                 android:textAlignment="textStart"
                 android:textColor="#FFFFFF"
@@ -349,94 +351,6 @@
                 android:textSize="14sp"
                 android:textStyle="bold"
                 tools:ignore="RtlCompat" />
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/textView6p"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginStart="8dp"
-            android:gravity="center_vertical"
-            android:text="Παραλαμβάνεται στη:"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:background="@drawable/border"
-            android:orientation="horizontal"
-            android:weightSum="4">
-
-            <CheckedTextView
-                android:id="@+id/city5p"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="2dp"
-                android:layout_weight="1"
-                android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-                android:checked="false"
-                android:gravity="center"
-                android:text="Θεσ/νίκη"
-                android:textAlignment="textStart"
-                android:textColor="#FFFFFF"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                tools:ignore="RtlCompat" />
-
-            <CheckedTextView
-                android:id="@+id/city6p"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-                android:checked="false"
-                android:gravity="center"
-                android:text="Αλεξάνδρεια"
-                android:textAlignment="textStart"
-                android:textColor="#FFFFFF"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                tools:ignore="RtlCompat" />
-
-            <CheckedTextView
-                android:id="@+id/city7p"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-                android:checked="false"
-                android:gravity="center"
-                android:text="Βέροια"
-                android:textAlignment="textStart"
-                android:textColor="#FFFFFF"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                tools:ignore="RtlCompat" />
-
-            <CheckedTextView
-                android:id="@+id/city8p"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-
-                android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-                android:checked="false"
-                android:gravity="center"
-                android:text="Νάουσα"
-                android:textAlignment="textStart"
-                android:textColor="#FFFFFF"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                tools:ignore="RtlCompat" />
-
 
         </LinearLayout>
 

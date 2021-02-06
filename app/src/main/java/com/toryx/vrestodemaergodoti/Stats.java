@@ -141,7 +141,7 @@ public class Stats extends AppCompatActivity {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
-String data= (String) "Κωδικός : "+ dataSnapshot.child("code").getValue()+" \nΚατάσταση : "+dataSnapshot.child("cond").getValue()+"\nΑποστολέας : "+dataSnapshot.child("friend").getValue();
+String data= (String) "Κωδικός : "+ dataSnapshot.child("code").getValue()+" \nΚατάσταση : "+dataSnapshot.child("cond").getValue()+"\nΠαραλήπτης : "+dataSnapshot.child("friend").getValue();
                 adapter.add(data);
                 Log.e("ggwp",data);
                 nameid.add((String)  dataSnapshot.child("cond").getValue());
