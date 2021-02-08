@@ -126,7 +126,7 @@ public class Apostoles extends AppCompatActivity {
                         selectedPosition = position;
                         SendButton.setEnabled(true);
                         String data = dataListView.getItemAtPosition(position).toString();
-                        Toast.makeText(Apostoles.this, data, Toast.LENGTH_LONG).show();
+                        Toast.makeText(Apostoles.this,"Επιλογή του : "+ data.substring(0,12), Toast.LENGTH_LONG).show();
 
 
                     }
@@ -229,7 +229,7 @@ public class Apostoles extends AppCompatActivity {
                     Toast.makeText(Apostoles.this, "Εμφανίζονται μόνο τα δέματα προς αποστολή", Toast.LENGTH_LONG).show();
                     adapter.clear();
                     for (String[] s : alld) {
-                        if (s[3].equals("Στην αναμονή για αποστολή")) {
+                        if (s[3].equals("Στην αναμονή για αποστολή") && s[0].charAt(8) == workplace.charAt(0)) {
                             adapter.add(s[0] + " | " + s[3]);
 
                         }
@@ -379,7 +379,7 @@ public class Apostoles extends AppCompatActivity {
 
                 } else {
                     filtoparadosi.setChecked(true);
-                    Toast.makeText(Apostoles.this, "Παράδοση Κατοίκον", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Apostoles.this, "Παράδοση Κατ΄οίκον", Toast.LENGTH_LONG).show();
                     int x = adapter.getCount();
                     for (int i = 0; i < x; i++) {
                         String s = adapter.getItem(i);

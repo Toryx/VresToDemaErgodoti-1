@@ -3,6 +3,7 @@ package com.toryx.vrestodemaergodoti;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -18,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -25,6 +27,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -37,11 +40,14 @@ public class Stats extends AppCompatActivity {
     private ListView dataListView2;
     private TextView par;
     private TextView apo;
+    private TextView emailpel;
+    private TextView tilpel;
     private FirebaseAuth firebaseAuth;
     ArrayList<String> listid;
     ArrayList<String>  nameid;
     ArrayList<String>  ggid;
     DatabaseReference dbRef;
+    DatabaseReference dbRefstoixeia;
     DatabaseReference dbRef2;
     ArrayList<String> onomata = new ArrayList<>();
     ArrayList<String> onomata2 = new ArrayList<>();
@@ -59,11 +65,14 @@ public class Stats extends AppCompatActivity {
         ggid = new ArrayList<>();
         dataListView = (ListView) findViewById(R.id.listrec);
         dataListView2 = (ListView) findViewById(R.id.listrec2);
+        emailpel =  findViewById(R.id.emailpelati);
+        tilpel =  findViewById(R.id.telpelati);
         TextView cond = findViewById(R.id.condition);
         EditText srh= findViewById(R.id.pelatis2);
         par = findViewById(R.id.textView7);
         apo = findViewById(R.id.textView8);
         ImageView backst = findViewById(R.id.back2);
+        dbRefstoixeia = database.getReference().child("Pelates").child(Id);
         dbRef = database.getReference().child("Pelates").child(Id).child("Send");
         dbRef2 = database.getReference().child("Pelates").child(Id).child("Received");
 
@@ -132,7 +141,21 @@ public class Stats extends AppCompatActivity {
 
 
 
+        dbRefstoixeia.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
+
+                tilpel.setText(dataSnapshot.child("userT").getValue().toString());
+                emailpel.setText(dataSnapshot.child("userE").getValue().toString());
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(Stats.this,databaseError.getCode(),Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void addChildEventListener() {

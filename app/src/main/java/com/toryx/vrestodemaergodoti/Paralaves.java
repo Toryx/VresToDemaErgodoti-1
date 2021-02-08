@@ -41,7 +41,9 @@ public class Paralaves extends AppCompatActivity {
     private Button resetbut;
     private ImageView pisw;
     String sendname;
+    boolean newsort2=true;
     LinearLayout filtrakoumpi;
+    LinearLayout taxikoumpi2;
     DatabaseReference dbRef3;
     DatabaseReference dbRef4;
     private FirebaseAuth firebaseAuth;
@@ -92,6 +94,7 @@ public class Paralaves extends AppCompatActivity {
         final Animation fadeIn = AnimationUtils.loadAnimation(Paralaves.this, android.R.anim.fade_in);
         final Animation fadeOut = AnimationUtils.loadAnimation(Paralaves.this, android.R.anim.fade_out);
         prosapos = findViewById(R.id.prosapostp);
+        taxikoumpi2=findViewById(R.id.taxip);
         workplace=getIntent().getStringExtra("meros");
         //Ολες οι Πολεις απο τα φιλτρα
         city1 = findViewById(R.id.city1p);
@@ -144,6 +147,20 @@ public class Paralaves extends AppCompatActivity {
         addChildEventListener();
         addChildEventListener2();
 
+        taxikoumpi2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayList<String> temp=new ArrayList<>();
+                for(int i=0;adapter.getCount()>i;i++){temp.add(adapter.getItem(adapter.getCount()-i-1));}
+                adapter.clear();
+                if(newsort2){ newsort2=false;
+                    Toast.makeText(Paralaves.this, "Ταξινόμηση βάση του πιο παλιού", Toast.LENGTH_LONG).show(); }
+                else{newsort2=true;
+                    Toast.makeText(Paralaves.this, "Ταξινόμηση βάση του πιο πρόσφατου", Toast.LENGTH_LONG).show(); }
+
+                for(int i=0;temp.size()>i;i++){adapter.add(temp.get(i));}
+            }
+        });
 
 
         // ΦΙΛΤΡΟ ΓΙΑ ΤΟΝ ΚΩΔΙΚΟ - ΑΜΕΣΗ ΑΝΑΝΕΩΣΗ ΤΗΣ ΛΙΣΤΑΣ
@@ -203,7 +220,7 @@ public class Paralaves extends AppCompatActivity {
 
                 if (prosapos.isChecked()) {
                     prosapos.setChecked(false);
-                    Toast.makeText(Paralaves.this, "ola ta demata", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Paralaves.this, "Εμφανίζονται όλα τα δέματα", Toast.LENGTH_LONG).show();
                     adapter.clear();
                     addChildEventListener();
 
@@ -214,7 +231,7 @@ public class Paralaves extends AppCompatActivity {
                     Toast.makeText(Paralaves.this, "Εμφανίζονται μόνο τα προς παραλαβή ή τα καθοδόν", Toast.LENGTH_LONG).show();
                     adapter.clear();
                     for (String[] s : alld) {
-                        if (s[3].equals("Καθοδόν") || s[3].equals("Προς Παραλαβή")) {
+                        if ((s[3].equals("Καθοδόν") || s[3].equals("Προς Παραλαβή")) && s[0].charAt(9) == workplace.charAt(0) ) {
                             adapter.add(s[0] + " | " + s[3]);
 
                         }
@@ -238,7 +255,7 @@ public class Paralaves extends AppCompatActivity {
                     city2.setChecked(false);
                     city3.setChecked(false);
                     city4.setChecked(false);
-                    Toast.makeText(Paralaves.this, "Apostoli  apo Thess", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Paralaves.this, "Αποστολή μόνο από Θεσσαλονίκη", Toast.LENGTH_LONG).show();
                     adapter.clear();
                     for (String[] s : alld) {
                         if (s[0].charAt(8) == 't') {
@@ -262,7 +279,7 @@ public class Paralaves extends AppCompatActivity {
                     city1.setChecked(false);
                     city3.setChecked(false);
                     city4.setChecked(false);
-                    Toast.makeText(Paralaves.this, "Apostoli  apo ΑΛΕΧandreia", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Paralaves.this, "Αποστολή μόνο από Αλεξάνδρεια", Toast.LENGTH_LONG).show();
                     adapter.clear();
                     for (String[] s : alld) {
                         if (s[0].charAt(8) == 'a') {
@@ -285,7 +302,7 @@ public class Paralaves extends AppCompatActivity {
                     city1.setChecked(false);
                     city2.setChecked(false);
                     city4.setChecked(false);
-                    Toast.makeText(Paralaves.this, "Apostoli mono apo ΒΕΡΟΙΑ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Paralaves.this, "Αποστολή μόνο από Βέροια", Toast.LENGTH_LONG).show();
                     adapter.clear();
                     for (String[] s : alld) {
                         if (s[0].charAt(8) == 'b') {
@@ -309,7 +326,7 @@ public class Paralaves extends AppCompatActivity {
                     city2.setChecked(false);
                     city3.setChecked(false);
                     adapter.clear();
-                    Toast.makeText(Paralaves.this, "Apostoli mono apo ΝΑΟΥΣΑ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Paralaves.this, "Αποστολή μόνο από Νάουσα", Toast.LENGTH_LONG).show();
                     for (String[] s : alld) {
                         if (s[0].charAt(8) == 'n') {
                             adapter.add(s[0] + " | " + s[3]);
@@ -329,7 +346,7 @@ public class Paralaves extends AppCompatActivity {
 
                 } else {
                     filtroanti.setChecked(true);
-                    Toast.makeText(Paralaves.this, "Me antikatavoli", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Paralaves.this, "Με αντικαταβολή", Toast.LENGTH_LONG).show();
                     int x = adapter.getCount();
                     for (int i = 0; i < x; i++) {
                         String s = adapter.getItem(i);
@@ -356,7 +373,7 @@ public class Paralaves extends AppCompatActivity {
 
                 } else {
                     filtoparadosi.setChecked(true);
-                    Toast.makeText(Paralaves.this, "Me paradosi katoikon", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Paralaves.this, "Παράδοση Κατ΄οίκον", Toast.LENGTH_LONG).show();
                     int x = adapter.getCount();
                     for (int i = 0; i < x; i++) {
                         String s = adapter.getItem(i);
@@ -582,6 +599,13 @@ public class Paralaves extends AppCompatActivity {
 
         ChangeDemaCond(alld.get(selectedPosition),para);
         adapter.clear();
+        city1.setChecked(false);
+        city2.setChecked(false);
+        city3.setChecked(false);
+        city4.setChecked(false);
+        filtroanti.setChecked(false);
+        filtoparadosi.setChecked(false);
+        prosapos.setChecked(false);
         addChildEventListener();
     }
 
